@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\title{SDE Simulation and Statistic}
+
+\date{Summarised: DATE}
+\author{M Sidik Augi Rahmat}
+\begin{document}
+\maketitle
+
+
+\section{Brownian Motion}
+A stochastic process is a t-parametric system of random variables $\{ X(t), t \in I\}$ where I is and interval of reals or a discrete set of indices. Or as its easy
+stochastic process is when random variable depends on some parameter, it could be time or another. One of example of stochastic process is Brownian motion. A Brownian
+motio $\{ X(t), t\geq 0 \}$ is a t-parametric system of random variables, for which satisfies the following properties:
+\begin{itemize}
+    \item $X_0 = 0$
+    \item The Increment are stationary and independent.
+    \item It is a martingale. (Martingale is pretty hard because need to know probability, measusere space and stuff. But basically martingale is a concept where
+    we double the bet if we lose in gambling. It because the random variable is independent each other.)
+    \item It has continuos path, but nowhere differentiable
+    \item $X_t - X_s \approx \mathcal{N}(0, t - s)$ for $t \geq s \geq 0$. It means  at the time $t>s$ the variable $X$ has a normal probability distribution.
+\end{itemize}
+A Brownian motion with parameters $\mu = 0$, $\sigma^2 = 1$ is called Wiener process.
+In our simulation, each increment is such that:
+\begin{equation}
+    X_{t_{i} + \Delta t} - X_{t_{i}} = \Delta X_i \approx \mathcal{N}(\mu \Delta t, \sigma^2 \Delta t)
+\end{equation}
+The process at time $T$ is given by $X_T = \Sigma_i \Delta X_i$ and follows the distribution:
+\begin{equation}
+    X_T \approx \mathcal{N}(\mu T, \sigma^2 T)
+\end{equation}
+
+A Brownian motion $\{ X(t), t\geq 0\}$ can be characterized by its deterministic and fluctuatuing components. Its Increments $dX(t)$ can be expressed in the following form 
+of total differential 
+\begin{equation}
+    dX(t) =\mu dt + \sigma dW(t)
+    \label{eq:SDE}
+\end{equation}
+where $dW(t)$ is Wiener process. Equation \ref{eq:SDE} is called stochastic differential equation.
+
+
+\section{Geometric Brownian Motion}
+If $\{ X(t), t\geq 0\}$ is a Brownian motion with parameters $\mu, \sigma$ and $y_o \in \mathbb{R} ^ +$, then the system of random variables $\{ Y(t), t\geq 0\}$
+\begin{equation}
+    Y(t) = y_0 e^{X(t)}, t \geq 0
+\end{equation}
+is called geometric Brownian motion. Expectef value and variance for geometric Brownian motion is defined basically
+\begin{equation}
+    E(Y(t)) = y_0 e^{ut + \frac{\sigma ^ 2 t}{2}}, \quad Var(Y(t)) = y_0 ^ {2} e ^ {2 \mu t + \sigma^2 t} ( e ^ {\sigma ^ 2 t} - 1)
+\end{equation}
+
+
+
+
+\end{document}
