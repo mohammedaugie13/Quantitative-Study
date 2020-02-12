@@ -1,0 +1,66 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[english]{babel}
+ \newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\title{Ito Integral}
+
+\date{Summarised: DATE}
+\author{M Sidik Augi Rahmat}
+\begin{document}
+\maketitle
+\section{Ito Integral}
+Important technical tools in analysis of stochastic processes are the so-called Ito integral. Construction of Ito integral is very similar to the definition of the Riemann-Stieltjes 
+integral of functions of real variable. First, we notice that it follows from the feginition of a Wiener process $w(t)$, that the random variable has a normal distribution with
+zero mean and dispersion t, i.e $w(t) \approx \mathcal{N}(0, t)$. This equality can be rewritten as:
+\begin{equation}
+    \int_0^t dw(\tau) = w(t) - w(0) = w(t) \approx N(0, t)
+\end{equation}
+It means that for a constant function $f(\tau) = c$ we have
+\begin{align}
+    \int_0^t f(\tau) dw(\tau) &= c \int_0^t dw(\tau) = cw(t) - cw(0)\\ \nonumber
+                              &= cw(t) \approx N(0, c^2t) = N(0, \int_0^t f^2 (\tau) d\tau)
+\end{align}
+Gives simple identity gives us and idea, how to define the so called Ito integral of measureable function $f : (0, t) \rightarrow \mathbb{R}$ such that $ \int_0^t f^2(\tau)d\tau < \infty$.
+We let 
+\begin{equation}
+    \int_0^t f(\tau) dw(\tau) := lim_{v\rightarrow 0} \Sigma_{i = 0}^{n-1}f(\tau_i)(w(\tau_{i+1}) - w(\tau_i))
+\end{equation}
+where $ v = max (\tau_{i+1} - \tau_i)$ is the norm of a partion $0 = \tau_0 < \tau_1 < ... < \tau_n = \tau$ of the interval $(0, t)$. Convergence is meant in probabilty.
+Let the function $f$ be constant on each subinterval $[\tau_i, \tau_{i+1}]$. Then, for the expected value of the finite sum $\Sigma_{i= 1}^n f(\tau_i) (w(t_{i+1}) - 
+w(t_i))$, it holds :
+\begin{equation}
+    E\bigg( \Sigma_{i=0}^{n-1} f(\tau_i)(w(\tau{i+1}) - w(\tau_i))\bigg) = \Sigma_{i=0}^{n-1}f(\tau_i)E(w(\tau)) = 0,
+\end{equation}
+because all increment $w(\tau_{i+1}) - w(\tau_i)$ are normally distributed random variables $w(\tau_{i+1}) - w(\tau_i) \approx N(0, \tau_{i+1} - \tau_{i})$. Since
+these increments are also independet and $w(\tau_{i+1}) - w(\tau_i) = \approx \mathcal{N}(0, 1)$ we may conclude for the sum of the independent normally distributed random variables
+the following identity:
+\begin{align}
+    E\bigg(\bigg[ \Sigma_{i=0}^{n-1} f(\tau_i) (w(\tau_{i+1}) - w(\tau_i))\bigg]^2 \bigg) &= \Sigma_{i=0}^{n-1} f^2(\tau_i) E(\Phi_i^{2})(\tau_{i+1}-\tau_i)\\
+    &= \Sigma_{i=1}^{n}f^2(\tau_i)(\tau_{i+1}-\tau_{i})
+\end{align}
+\section{Ito Lemma}
+Analysis of functions, representing prices of financial derivatives, whose one or more variable are stochastic random variables satisfying prescribed stochastic differential equations
+plays a key role in theory of pricing financial derivatives. In this section, we focus our attention on the question whether there exist a stochastic differential equation 
+describing evolution of a smooth functiopn $f(x,t)$ of two variables, where the variable $x$ itself is a solution to prescribed stochastic differential equation.
+The positive answer to this question is given by Ito lemma. This is a key stone of analysis of stochastic differential equations.
+\begin{lemma}
+    (Ito lemma). Let $f(x,t)$ be a smooth function of two variables. Assume the variable $x$ is a solution to the stochastic differential equation
+    \begin{equation}
+        dx = \mu(x,t) dt + \sigma(x,t) dw
+    \end{equation}
+    where $w$ is a Wiener process. Then the first differential of the function $f$ is given by
+    \begin{equation}
+        df = \frac{\partial f}{\partial x} dx + \bigg( \frac{\partial f}{\partial t} + \frac{1}{2}\sigma^2(x, t) \frac{\partial^2 f}{\partial x^2} \bigg) dt
+    \end{equation}
+    and so the function $f$ satisfies the stochastic differential equation
+    \begin{equation}
+        d f=\left(\frac{\partial f}{\partial t}+\mu(x, t) \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^{2}(x, t) \frac{\partial^{2} f}{\partial x^{2}}\right) d t+\sigma(x, t) \frac{\partial f}{\partial x} d w
+    \end{equation}
+\end{lemma}
+
+\end{document}
