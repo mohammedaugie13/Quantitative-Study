@@ -7,14 +7,14 @@
  \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
-\title{Ito Integral}
+\title{It\={o} Integral}
 
-\date{Summarised: DATE}
+\date{}
 \author{M Sidik Augi Rahmat}
 \begin{document}
 \maketitle
-\section{Ito Integral}
-Important technical tools in analysis of stochastic processes are the so-called Ito integral. Construction of Ito integral is very similar to the definition of the Riemann-Stieltjes 
+\section{It\={o} Integral}
+Important technical tools in analysis of stochastic processes are the so-called It\={o} integral. Construction of It\={o} integral is very similar to the definition of the Riemann-Stieltjes 
 integral of functions of real variable. First, we notice that it follows from the feginition of a Wiener process $w(t)$, that the random variable has a normal distribution with
 zero mean and dispersion t, i.e $w(t) \approx \mathcal{N}(0, t)$. This equality can be rewritten as:
 \begin{equation}
@@ -25,7 +25,7 @@ It means that for a constant function $f(\tau) = c$ we have
     \int_0^t f(\tau) dw(\tau) &= c \int_0^t dw(\tau) = cw(t) - cw(0)\\ \nonumber
                               &= cw(t) \approx N(0, c^2t) = N(0, \int_0^t f^2 (\tau) d\tau)
 \end{align}
-Gives simple identity gives us and idea, how to define the so called Ito integral of measureable function $f : (0, t) \rightarrow \mathbb{R}$ such that $ \int_0^t f^2(\tau)d\tau < \infty$.
+Gives simple identity gives us and idea, how to define the so called It\={o} integral of measureable function $f : (0, t) \rightarrow \mathbb{R}$ such that $ \int_0^t f^2(\tau)d\tau < \infty$.
 We let 
 \begin{equation}
     \int_0^t f(\tau) dw(\tau) := lim_{v\rightarrow 0} \Sigma_{i = 0}^{n-1}f(\tau_i)(w(\tau_{i+1}) - w(\tau_i))
@@ -43,13 +43,13 @@ the following identity:
     E\bigg(\bigg[ \Sigma_{i=0}^{n-1} f(\tau_i) (w(\tau_{i+1}) - w(\tau_i))\bigg]^2 \bigg) &= \Sigma_{i=0}^{n-1} f^2(\tau_i) E(\Phi_i^{2})(\tau_{i+1}-\tau_i)\\
     &= \Sigma_{i=1}^{n}f^2(\tau_i)(\tau_{i+1}-\tau_{i})
 \end{align}
-\section{Ito Lemma}
+\section{It\={o} Lemma}
 Analysis of functions, representing prices of financial derivatives, whose one or more variable are stochastic random variables satisfying prescribed stochastic differential equations
 plays a key role in theory of pricing financial derivatives. In this section, we focus our attention on the question whether there exist a stochastic differential equation 
 describing evolution of a smooth functiopn $f(x,t)$ of two variables, where the variable $x$ itself is a solution to prescribed stochastic differential equation.
-The positive answer to this question is given by Ito lemma. This is a key stone of analysis of stochastic differential equations.
+The positive answer to this question is given by It\={o} lemma. This is a key stone of analysis of stochastic differential equations.
 \begin{lemma}
-    (Ito lemma). Let $f(x,t)$ be a smooth function of two variables. Assume the variable $x$ is a solution to the stochastic differential equation
+    (It\={o} lemma). Let $f(x,t)$ be a smooth function of two variables. Assume the variable $x$ is a solution to the stochastic differential equation
     \begin{equation}
         dx = \mu(x,t) dt + \sigma(x,t) dw
     \end{equation}
@@ -62,5 +62,36 @@ The positive answer to this question is given by Ito lemma. This is a key stone 
         d f=\left(\frac{\partial f}{\partial t}+\mu(x, t) \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^{2}(x, t) \frac{\partial^{2} f}{\partial x^{2}}\right) d t+\sigma(x, t) \frac{\partial f}{\partial x} d w
     \end{equation}
 \end{lemma}
-
+Now, it follows from the property $dw = \Phi\sqrt{dt}$ where $\Phi \approx \mathcal{N}(0, 1)$ that 
+\begin{equation}
+    E\left((d w)^{2}-d t\right)=0
+\end{equation}
+and
+\begin{equation}
+    \operatorname{Var}\left((d w)^{2}-d t\right)=\left[E\left(\Phi^{4}\right)-E\left(\Phi^{2}\right)^{2}\right](d t)^{2}=2(d t)^{2}
+\end{equation}
+By negelecting higher order terms in $dt$ we can approximaate the term $(dw)^2$ by $dt$.
+We obtain 
+\begin{equation}
+    (d x)^{2}=\sigma^{2}(d w)^{2}+2 \mu \sigma d w d t+\mu^{2}(d t)^{2} \approx \sigma^{2} d t+O\left((d t)^{3 / 2}\right)+O\left((d t)^{2}\right)
+\end{equation}
+Similar for the term $d x d t=O\left((d t)^{3 / 2}\right)+O\left((d t)^{2}\right)$, and cosequently the first order expansion of the differential $df$ with respect to infinitesimal increments $dt$
+and $dx$ can be written in the form 
+\begin{equation}
+    d f=\frac{\partial f}{\partial x} d x+\left(\frac{\partial f}{\partial t}+\frac{1}{2} \sigma^{2}(x, t) \frac{\partial^{2} f}{\partial x^{2}}\right) d t
+\end{equation}
+and then substituting $d x=\mu(x, t) d t+\sigma(x, t) d w$, we will get
+\begin{equation}
+    d f=\left(\frac{\partial f}{\partial t}+\mu(x, t) \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^{2}(x, t) \frac{\partial^{2} f}{\partial x^{2}}\right) d t+\sigma(x, t) \frac{\partial f}{\partial x} d w
+\end{equation}
+\section{Example of It\={o} Lemma}
+Let us consider a Brownian motion $dX = \mu dt + \sigma dw$ and its function $Y(t)=f(X(t),t)$ where $f(X,t) = e^X$. By applying It\={o} lemma we obtain
+\begin{equation}
+    d Y=\left(\frac{\partial f}{\partial t}+\mu \frac{\partial f}{\partial X}+\frac{1}{2} \sigma^{2} \frac{\partial^{2} f}{\partial X^{2}}\right) d t+\sigma \frac{\partial f}{\partial X} d w=\left(\mu+\frac{\sigma^{2}}{2}\right) Y d t+\sigma Y d w
+\end{equation}
+As a cosequences, we obtain for the expected value $E(Y(t))$ the following ordinary differential equation
+\begin{equation}
+    d E(Y(t))=\left(\mu+\frac{\sigma^{2}}{2}\right) E(Y(t)) d t
+\end{equation}
+and easily deduce that $E(Y(t))=E(Y(0)) e^{\left(\mu+\sigma^{2} / 2\right) t}$.
 \end{document}
