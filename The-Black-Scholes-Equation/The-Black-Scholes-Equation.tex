@@ -1,0 +1,101 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[english]{babel}
+ \newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\title{The Black-Scholes-Equation}
+
+\date{}
+\author{M Sidik Augi Rahmat}
+\begin{document}
+\maketitle
+In this section we derive a mathematical model for pricing financial derivatives, such as options. mathematical formulation of this model is represented by the so-called Black-Scholes
+partial differential equation. It describes the tie evolution of a derivative price as a function of the underlying aset price and time remaining to maturity of a derivative.
+The derivation of the Black-Scholes differential equation will be shown on the example of a European call option. Recall that the call option is a contract, in which thr holder of an option has the right but no obligation to purchase the 
+underlying asset from the writer of an option in the predetermined ezpiration time t=T at the strike price. We emphasize that the holder has the right but not obligation to buy the stock. Hence this right has a certain value and at the time of signing the contract $t=0$.
+The buyer (holder) of such an option as to pay the so called option premium V to the writer of a call option. For both sides og the contract, i.e for the writer or the option as well as for the holder, it is of interest to know, what is the fair price of this premium.
+Let us denote:
+\begin{itemize}
+    \item $S$ - value of the underlying asset price,
+    \item $V$ - value of a derivative (option) on the underlying asset
+    \item $T$ - expiration time, i.e. date of expiry (maturity) of the option
+    \item $E$ - expiration (strike) price of the option
+    \item $t$ - time
+\end{itemize}
+Our goal is to find mathematical model describing price of an option $V=V(S,t)$ as a function of the underlying asset price $S$ and the time.
+\section{A Stochastic Differential Equation for the Option Price}
+As we have already mentioned in the previous section, in order to model random evolution of the underlying asset price
+as a function of time $S = S(t)$ we will use the stochastic differential equation representing the geometric Brownian motion.
+\begin{equation}
+    dS = \mu S dt + \sigma S dw
+\end{equation}
+where $dS$ is the change of asset value over the time interval of a length $dt$, $\mu$ represents a trend of underlying asset price evolution and $\sigma$ is its volatility. By $dw$ we have denoted the differential of a Wiener process. The deterministic 
+process $dS = \mu S dt$ (i.e, $\sigma = 0$) jas solution $S(t) = S(0) e^{\mu * t}$ representing thus exponential growth (decrease if $\mu<0$) of asset values obsered in financial markets. Furthermore, notice that the stochastic equation can be also written in the form
+\begin{equation}
+    \frac{d S}{S}=\mu dt + \sigma dw
+\end{equation}
+The term $\sigma dw$ can be therefore understood as random fluctuation over the trend part of the asset price. Hence the essential information is contained in the ralative changes $dS/S$ and not in the absolute change in the asset price $dS$. Moreover, the relativized differential 
+$dS / S$ represents a return on asset. Another reason is that resulting model has to be invariant with respect a return on asset. Another reason is that resulting model has to be invariant with respect to choice of units, i.e the pricing formula should be currency unit invariant. \par
+
+In the next step we derive a stochastic differential equation describing the evolution of an arbitrary smooth function (derivative) of asset price and time. Suppose that a function $V=V(S,t)$ can be derived by using the funfamental tool in theory random process It\={o}. In our case, 
+the variable $S$ satisfies the stochastic differential equation $dS= \mu S dt + \sigma S dw$ and hence $\mu(S, t)=\mu S, \sigma(S, t)=\sigma S$, where $\mu, \sigma$ are constant. Then a function $V(S,T)$ if the stochastic process $S$ satisfies the following stochastic differential equation
+\begin{equation}
+    d V=\left(\frac{\partial V}{\partial t}+\mu S \frac{\partial V}{\partial S}+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}}\right) d t+\sigma S \frac{\partial V}{\partial S} d w
+\end{equation}
+\section{Self financing Portofolio Management with Zero Growth of Investment}
+Let us construct a portofolio consisting of underlying assets, options on these assets and riskless bonds. We will consider the so-called self financing portofolio, i.e a portofolio in which the purchase or sale of one the three components has to be compensated by selling or purchasing another component of the portofolio.
+More precisely, at time $t$ the portofolio consists of amount of $Q_s$ stocks with the unit price $S$, amount of $Q_v$ option with the unit consists of amount of $Q_s$ stocks with the unit price $S$, amount of $Q_v$ option with the unit price $V$ and riskless zero-coupon bonds having the total money value $B$. If we denote $M_s = SQ_s$, $M_v = VQ_v$,
+then the assumption of zero net investment means, that balance equation 
+\begin{equation}
+    M_s + M_v + B = 0
+\end{equation}
+for $t\in[0, T]$. Now Merton's conditon on self-financing of the portofolio can be stated in the following form
+\begin{equation}
+    S d Q_{S}+V d Q_{V}+\delta B=0
+    \label{eq:1}
+\end{equation}
+where $dQ_s$, $dQ_v$ denote changes in the amount of underlying assets and options.  In the case bonds are dynamically used/gained in self-financing the portofolio we have the total changein the money volume of the bonds $dB$ expressed as
+\begin{equation}
+    d B=r B d t+\delta B
+    \label{eq:2}
+\end{equation}
+Inserting (\ref{eq:2}) to (\ref{eq:1}) we will obtain 
+\begin{align}
+    0 &=d\left(S Q_{s}+V Q_{V}+B\right) \\
+    &=S d Q_{s}+V d Q_{V}+\delta B+Q_{s} d S+Q_{V} d V+r B d t \\
+    &=Q_{s} d S+Q_{V} d V-r\left(S Q_{s}+V Q_{V}\right) d t
+\end{align}
+after dividing by a nonzero value $Q_v$ of the amount of optipns in portofolio, we conclude that:
+\begin{equation}
+    d V-r V d t-\mathbb{O}(d S-r S d t)=0, \quad \text { where } \mathbb{O}=-\frac{Q_{S}}{Q_{V}}
+\end{equation}
+Recall that both random processes, i.e the asset proce $S$, as well as the option price $V$ satisfy stochastic differential equations
+\begin{equation}
+    \begin{array}{l}
+    {d S=\mu S d t+\sigma S d w} \\
+    {d V=\left(\frac{\partial V}{\partial t}+\mu S \frac{\partial V}{\partial S}+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}}\right) d t+\sigma S \frac{\partial V}{\partial S} d w}
+    \end{array}
+\end{equation}
+Substituing the above expression for the differential $dS$ and $dV$, we obtain after some manipulations,
+\begin{equation}
+    \bigg(\frac{\partial V}{\partial t}+\mu S \frac{\partial V}{\partial S}+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}}-r V- \mathbb{O}\mu S+ \mathbb{O}r S \bigg)  d t+  \sigma S\bigg(\frac{\partial V}{\partial S}- \mathbb{O} \bigg) d w=0
+\end{equation}
+The puspose of a risk-neutral investor is to combine the portofolio of assets, options and bonds in such a way that a risk of the portofolio is neutralized. Such a behavior of an investor is called risk aversion. Clearly, the only 
+stochastic term in the equation above is represented by the differential $dw$ of the Wiener process. This term vanishes provided that we choose the ratio $\mathbb{O}$ as follows:
+\begin{equation}
+    \mathbb{O}=\frac{\partial V}{\partial S}
+\end{equation}
+After Substituing this choice of $\mathbb{O}$ to the remaining deterministic part we obtain the result equation
+\begin{equation}
+    \frac{\partial V}{\partial t}+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}}+r S \frac{\partial V}{\partial S}-r V=0
+\end{equation}
+whics is refereed to as the Black-Scholes partial differential equation for pricing derivative.
+\section{References}
+\begin{itemize}
+    \item Fischer Black and Myron Scholes, The pricing of options and corporate liabilities, The Journal of Political Economy $81(1973),$ no. $3,637-654$
+\end{itemize}
+\end{document}
