@@ -93,7 +93,22 @@ After Substituing this choice of $\mathbb{O}$ to the remaining deterministic par
 \begin{equation}
     \frac{\partial V}{\partial t}+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}}+r S \frac{\partial V}{\partial S}-r V=0
 \end{equation}
-whics is refereed to as the Black-Scholes partial differential equation for pricing derivative.
+whics is refereed to as the Black-Scholes partial differential equation for pricing derivative. \par 
+
+Let us consider useful generalization of Black-Scholes equation for the case when underlying asset is paying nontrivial continous dividens with an annualized dividends yield $q \geq 0 $. In this case, holding the underlying asset with price $S$ receive a divideng yield
+$qSdt$ over any time interval with length $dt$. By paying dividends the asset price itself falls. It can be expressed by modifying the drift part of the stochastic differential equation for the asset price. Hence the asset price satisfiest the stochastic differential equation
+\begin{equation}
+    d S=(\mu-q) S d t+\sigma S d w
+\end{equation}
+On the otehr hand, by receiving dividends, we have new resources for our self financing portofolio. Their total money volume being $qSsQ_sdt$ over the time interval dt. This amount of money can be therefore added as an extra income to the right hand side of the equation describing change of the money volume of secure bonds $dB = rBdt + \delta B + qSQ_s dt$.
+This way we have modified equation to the following form:
+\begin{equation}
+    d V-r V d t-\square(d S-(r-q) S d t)=0
+\end{equation}
+Repeating the remaining step of derivation of the Black-Scholes equation we end up with modifies equation which includes a continous divideng yield $q \geq 0$:
+\begin{equation}
+    \frac{\partial V}{\partial t}+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}}+(r-q) S \frac{\partial V}{\partial S}-r V=0
+\end{equation}
 \section{References}
 \begin{itemize}
     \item Fischer Black and Myron Scholes, The pricing of options and corporate liabilities, The Journal of Political Economy $81(1973),$ no. $3,637-654$
