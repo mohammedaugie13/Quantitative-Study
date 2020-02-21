@@ -111,6 +111,7 @@ where the coefficients $A, B$ satisfy
 By simple algebraic computation, we find that constants $\alpha, \beta$ can be chosen in such way that the terms $A, B$ are vanishing. Indeed
 \begin{equation}
     \alpha=\frac{r-q}{\sigma^{2}}-\frac{1}{2}, \quad \beta=\frac{r+q}{2}+\frac{\sigma^{2}}{8}+\frac{(r-q)^{2}}{2 \sigma^{2}}
+    \label{eq:koef}
 \end{equation}
 With this choice of coefficients $\alpha, \beta$ the resulting equation for the function $u$ has the form
 \begin{align}
@@ -143,5 +144,44 @@ and the error function $erf(x)$ of the normal distribution are defined by means 
 \begin{equation}
     N(x) = \frac{1}{\sqrt{2 \pi}} \int_{\infty}^{x} e^{-\frac{\xi^2}{2}d\xi}, \quad \frac{1-erf(x)}{2} = \frac{1}{\pi} \int_{x}^{\infty} e^{\xi^2} d\xi
 \end{equation}
+The following identities are useful:
+\begin{equation}
+    erf(-x) = -erf(x) \quad \frac{1}{2} \bigg(1 + erf \bigg( \frac{x}{\sqrt{2}} \bigg)\bigg) = \frac{1}{\sqrt{2}} \int_{\infty}^{x} e^{-\xi^2/2} d\xi = N(x)
+\end{equation}
+for each $x \in \mathbb{R}$.
+Let us consider the integral
+\begin{equation}
+    I_1 = \frac{e^{\beta \tau}}{\sqrt{2\sigma^2 \tau}} \frac{1}{\sqrt{\pi}} \int_{-ln\frac{S}{E}}^{\infty} e^{ -\frac{y^2}{2\sigma^2 \tau} + (1 + \alpha)y}dy
+\end{equation}
+By introducing another substitution $\xi = \frac{y}{\sqrt{2\sigma^2 \tau}} - \frac{1 + \alpha}{2} \sqrt{2\sigma^2 \tau}$ and using realtion (\ref{eq:koef}) we obtain
+\begin{equation}
+    - \frac{y^2}{2\sigma^2 \tau} + (1 + \alpha)y = -xi^2 + (1 + \alpha)^2 \frac{\sigma^2 \tau }{2} = -\xi^2 + (\beta - q) \tau
+\end{equation}
+Hence 
+\begin{align}
+    I_1 &= e^{-q \tau } \frac{1}{\sqrt{\pi}} \int_{-\frac{1+\alpha}{2} \sqrt{2\sigma^2 \tau}- \frac{ln \frac{S}{E}}{\sqrt{2*\sigma^2 \tau}}}^{\infty} e^{-xi^2} d\xi\\
+        &= e^{-q \tau }/2 \bigg[ 1 - erf \bigg(-\frac{1 + \alpha }{2} \sqrt{2 \sigma^2 \tau} - \frac{ln \frac{S}{E}}{\sqrt{2 \sigma^2 \tau}} \bigg) \bigg]\\
+        &= e^{-q \tau }/2 \bigg[ 1 + erf \bigg( \frac{1}{\sqrt{2}} \frac{(r - q + \frac{\sigma^2}{2}) \tau + ln \frac{S}{E}}{\sigma \sqrt{\tau}}\bigg)\bigg]\\
+\end{align}
+
+By introducing another substituion $\xi = \frac{y}{\sqrt{2\sigma^2 \tau}} - \frac{\alpha}{\sigma{2\sigma^2 \tau}}$ we can compute the integral
+\begin{equation}
+    I_2 = \frac{e^{-r \tau}}{2} \bigg[ 1 + erf \bigg( \frac{1}{\sqrt{2}} \frac{(r-q-\frac{\sigma^2}{2})\tau + ln\frac{S}{E}}{\sigma \sqrt{\tau}}\bigg) \bigg]
+\end{equation}
+Substituting above results for the integrals $I_1$ and $I_2$ we can finally get the formula for the \textbf{Call European Options} $V(S, 0)$:
+\begin{align}
+    V(S, T-\tau) &= \frac{Se^{-q\tau}}{2} \bigg[ 1 + erf \bigg( \frac{1}{\sqrt{2}} \frac{1}{\sqrt{2}} \frac{(r - q + \frac{\sigma^2}{2}) \tau + ln \frac{S}{E}}{\sigma \sqrt{\tau}} \bigg) \bigg]\\
+                &- \frac{E e^{-r \tau}}{2} \bigg[ 1 + erf \bigg( \frac{1}{\sqrt{2}} \frac{1}{\sqrt{2}} \frac{(r - q - \frac{\sigma^2}{2}) \tau + ln \frac{S}{E}}{\sigma \sqrt{\tau}} \bigg) \bigg]
+\end{align}
+Using the relations between functions $N(x)$ and $erf(x)$ we finally conclude
+\begin{equation}
+    V(S,t) = S e^{-q(T-t)} N(d_1) - E e^{-r(T-t)} N(d_2)
+    \label{eq:BSE-European}
+\end{equation}
+where
+\begin{equation}
+    d_1 = \frac{(r - q + \frac{\sigma^2}{2}) (T - t) + ln \frac{S}{E}}{\sigma \sqrt{T-t}}, \quad d_2 = d_1 - \sigma\sqrt{T-t}
+\end{equation}
+Expression (\ref{eq:BSE-European}) is called the Black-Scholers formula for prcing European call options.
 \end{itemize}
 \end{document}
