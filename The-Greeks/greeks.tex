@@ -1,0 +1,63 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[english]{babel}
+ \newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\title{Analysis of Dependence of Options Prices on Model Parameters}
+
+\date{}
+\author{M Sidik Augi Rahmat}
+\begin{document}
+\maketitle
+\section{A Useful Identity for Black-Scholes Option Prices}
+Before we begin analysis parameters of option, we derive some useful identity for Black-Scholes equation. Note from this we denote $V^{ec}$ as European option call and 
+$V^{ep}$ as European option put :
+\begin{align}
+    V^{ec}(S, t) &= Se^{-q(T-t)}N(d_1)-Ee^{-r(T-t)}N(d2)\\
+    V^{ep}(S, t) &= Ee^{-r(T-t)}N(-d2)-Se^{-q(T-t)}N(-d1)
+\end{align}
+where 
+\begin{equation}
+    d_1 = \frac{ln\frac{S}{E} + (r - q + \frac{\sigma^2}{2})(T-t)}{\sigma \sqrt{T-t}}, \quad d_2 = d_1 - \sigma\sqrt{T-t}
+\end{equation}
+We begin with computing the difference $(d_1^2 - d_2^2)/2$. Since $d_2 = d_1 - \sigma\sqrt{T-t}$ we obtain
+\begin{align}
+    \frac{d^2_1 -d^2_2}{2} &= \frac{(d_1 + d_2)(d_1 - d_2)}{2} = \frac{2 ln \frac{S}{E} + 2(r-q)(T-t) \sigma\sqrt{T-t}}{\sigma \sqrt{T-t} 2}\\
+    &= ln \frac{S}{E} + (r-q)(T-t)
+\end{align}
+and hence
+\begin{equation}
+    \frac{d_1 ^ 2}{2} = \frac{d_2^2}{2} + ln \frac{S}{E} + (r-q)(T-t)
+\end{equation}
+For derivative of cumulative distribution function $N'(d)$ of the standardized normal distribution we have
+\begin{equation}
+    N'(d) = \frac{1}{\sqrt{2\pi}}exp(-d^2 / 2)
+\end{equation}
+Using the above identity for the difference $(d_1^2 -d_2^2)$ we finally obtain an important identity:
+\begin{equation}
+    Se^{-q(T-t)}N'(d_1)-Ee^{-r(T-t)}N'(d_2) = 0
+    \label{eq:identity}
+\end{equation}
+\section{Delta of an Option}
+The basic sensitivity factor, which is often evaluated when analyzing the market data, is dependece of a change of derivative price with respect to a change of the price
+with respect to a change of the price og the underlying asset stock. In the infinitesimal form this factor can be written as partial
+derivative:
+\begin{equation}
+    \Delta = \frac{\partial V}{\partial S}
+\end{equation}
+For European call and put options we are able to derive an explicit formulae for the factor $\Delta$. We differentiate the functions $V^{ec}$ and $V^{ep}$ with respect to $S$. For a call option, it 
+the relationship $\partial d_1/ \partial S = \partial d_2 / \partial S$ and using the identity (\ref{eq:identity}) we got:
+\begin{align}
+\Delta^{ec} &= \frac{\partial V^{ec}}{\partial S} = Se^{-q(T-t)}N'(d_1) \frac{\partial d_1}{\partial S} - Ee^{-r(T-t)}N'(d_2)\frac{\partial d_2}{\partial S}\\
+            &+ e^{-q(T-t)}N(d_1)= e^{-q(T-t)N(d_1)}
+\end{align}
+for a European put we obtain:
+\begin{align}
+    \Delta^{ep} &= \frac{\partial V^{ec}}{\partial S} = Se^{-q(T-t)}N'(-d_1)\frac{\partial d_1}{\partial S} - Ee^{-r(T-t)}N'(-d_2)\frac{\partial d_2}{\partial S}\\
+    &- e^{-q(T-t)}N(-d_1)=-e^{-q(T-t)}N(-d_1)
+\end{align} 
+\end{document}
