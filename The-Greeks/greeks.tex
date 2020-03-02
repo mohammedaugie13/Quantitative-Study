@@ -59,5 +59,66 @@ for a European put we obtain:
 \begin{align}
     \Delta^{ep} &= \frac{\partial V^{ec}}{\partial S} = Se^{-q(T-t)}N'(-d_1)\frac{\partial d_1}{\partial S} - Ee^{-r(T-t)}N'(-d_2)\frac{\partial d_2}{\partial S}\\
     &- e^{-q(T-t)}N(-d_1)=-e^{-q(T-t)}N(-d_1)
-\end{align} 
+\end{align}
+
+\section{Gamma of an Option}
+If we could consider option as a particle which move in space (in this context every point in space associate with stock price, or maybe we can say as (Price Space)\footnote{This concept it just intuitevly by me, is interesting though, to analyze deep down of algebra or calculus property of this concept}) we can say that $\Delta$ as velocity. And we define another factor called Gamma $\Gamma$ defined by
+\begin{equation}
+    \Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 V}{\partial S^2}
+    \label{eq:Gamma}
+\end{equation}
+From eq.(\ref{eq:Gamma}) we can say that $\Gamma$ is a acceleration of option. It represent sensitivity of the price changes of option. Similarly as for the factor
+$\Delta$, we are able to derive an explicit formula for the factor $\Gamma$ for European call and put options. Differentiating formula $\Delta$ respect to $S$ we 
+obtain 
+\begin{align}
+    \Gamma^{ec} &= \Gamma^{ep} = \frac{\partial \Delta^{ec}}{\partial S}= e^{-q(T-t)N'(d_1)\frac{\partial d_1}{\partial S}}\\
+                &= e^{-q(T-t)} \frac{exp(-\frac{1}{2}d_1^2)}{\sigma \sqrt{2\pi(T-t)} S}
+\end{align}
+\section{Rho of an Option}
+Factor $\rho$ shows the sensitivity of the derivative price with respect to a change of interest rate of riskless bond $r > 0$. Factor $\rho$ is therfore given as a derivative 
+\begin{equation}
+    \rho = \frac{\partial V}{\partial r}
+\end{equation}
+An analytical expression of the factor $\rho$ can be obtained by differentiating the explicit formula for prices of European call and put option. Using the eq.(\ref{eq:identity}) and the fact
+that $d_2$ = $d_1 - \sigma \sqrt{T-t}$ we obtain:
+\begin{align}
+    \rho^{ec} &= \frac{\partial V^{ec}}{\partial r} = S e^{-q(T-t)} N'(d_1) \frac{\partial d_1}{\partial r} - E e^{-r(T-t)}N'(d_2)\frac{\partial d_2}{\partial r}\\
+              &+ E(T-t)e^{-r(T-t)} N(d_2) = E(T-t)e^{-r(T-t)}N(d_2)
+\end{align}
+\begin{align}
+    \rho^{ep} &= \frac{\partial V^{ep}}{\partial r} = -E e^{-q(T-t)} N'(- d_2) \frac{\partial d_2}{\partial r} + S e^{-q(T-t)}N'(d_1)\frac{\partial d_1}{\partial r}\\
+              &- E(T-t)e^{-r(T-t)} N(-d_2) = E(T-t)e^{-r(T-t)}N(-d_2)
+\end{align}
+
+\section{Theta of Option}
+The factor $\Theta$ represent sensitivity of a derivative price with respect to the expiration time of the derivative $T$ and it is defined as the derivative. The factor $\Theta$
+can be expreseed as
+\begin{equation}
+    \Theta = \frac{\partial V}{\partial t}
+\end{equation}
+Since $d_2 = d_1 - \sigma \sqrt{T-t}$, we obtain 
+\begin{equation}
+    \frac{\partial d_2}{\partial t} = \frac{\partial d_1}{\partial t} + \frac{\sigma}{2 \sqrt{T-t}}
+\end{equation}
+After some rearrangements, we finally obtain:
+\begin{align}
+    \Theta^{ec} &= \frac{\partial V^{ec}}{\partial t} = Sqe^{q(T-t)}N(d_1)-Ere^{-r(T-t)}N(d_2)\\
+    &- \frac{E \sigma }{2 \sqrt{T-t}}e^{-r(T-t)}N'(d_2)
+\end{align}
+\begin{align}
+    \Theta^{ep} &= \frac{\partial V^{ep}}{\partial t} = Ere^{q(T-t)}N(-d_2)-Sqe^{-q(T-t)}N(-d_1)\\
+    &- \frac{E \sigma }{2 \sqrt{T-t}}e^{-r(T-t)}N'(-d_2)
+\end{align}
+
+\section{Vega of Option}
+The factor Vega $\gamma$ \footnote{Vega is not Greek letter} describes sensitivity of a derivative secuirty with respect to change
+if the volatility og the underlying asset price and hence it is defined as derivative 
+\begin{equation}
+    \gamma = \frac{\partial \gamma}{\partial \sigma}
+\end{equation}
+Thus for vega we've got:
+\begin{equation}
+    \gamma^{ec} = \gamma^{ep} = E e^{-r(T-t)}N'(d_2)\sqrt{T-t}
+\end{equation}
+
 \end{document}
