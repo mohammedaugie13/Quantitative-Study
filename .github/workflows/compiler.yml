@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Github Actions
 
 # Controls when the action will run. Triggers the workflow on push or pull request 
 # events but only for the master branch
@@ -10,7 +10,7 @@ on:
   pull_request:
     branches: [ master ]
 jobs:
-  valuation:
+  build-latex:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
@@ -21,5 +21,34 @@ jobs:
           root_file: Brownian-Motion.tex
           working_directory: Brownian-Motion/Brownian-Motion-Tex/
           args: "--verbose"
-
-
+      - name: European Option
+        uses: ./
+        with:
+          root_file: European-Option.tex
+          working_directory: European-Option/
+          args: "--verbose"
+      - name: Ito-Integral
+        uses: ./
+        with:
+          root_file: Ito.tex
+          working_directory: Ito-Integral/
+          args: "--verbose"
+      - name: The-Black-Scholes-Equation
+        uses: ./
+        with:
+          root_file: The-Black-Scholes-Equation.tex
+          working_directory: The-Black-Scholes-Equation/
+          args: "--verbose"
+      - name: The-Greeks
+        uses: ./
+        with:
+          root_file: greeks.tex
+          working_directory: The-Greeks/
+          args: "--verbose"
+      # https://github.com/xu-cheng/latex-action/issues/16
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: Valuation
+          path: valuation
+        if: always()
