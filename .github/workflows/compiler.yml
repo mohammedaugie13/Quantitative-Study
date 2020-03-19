@@ -49,6 +49,6 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@master
         with:
-          name: Valuation
-          path: valuation
+          name: PDF
+          path: PDF
         if: always()
