@@ -19,36 +19,36 @@ jobs:
         uses: ./
         with:
           root_file: Brownian-Motion.tex
-          working_directory: Brownian-Motion/Brownian-Motion-Tex/
+          working_directory: tex/
           args: "--verbose"
       - name: European Option
         uses: ./
         with:
           root_file: European-Option.tex
-          working_directory: European-Option/
+          working_directory: tex/
           args: "--verbose"
       - name: Ito-Integral
         uses: ./
         with:
           root_file: Ito.tex
-          working_directory: Ito-Integral/
+          working_directory: tex/
           args: "--verbose"
       - name: The-Black-Scholes-Equation
         uses: ./
         with:
           root_file: The-Black-Scholes-Equation.tex
-          working_directory: The-Black-Scholes-Equation/
+          working_directory: tex/
           args: "--verbose"
       - name: The-Greeks
         uses: ./
         with:
           root_file: greeks.tex
-          working_directory: The-Greeks/
+          working_directory: tex/
           args: "--verbose"
       # https://github.com/xu-cheng/latex-action/issues/16
       - name: Upload
         uses: actions/upload-artifact@master
         with:
-          name: PDF
-          path: PDF
+          name: tex
+          path: tex
         if: always()
